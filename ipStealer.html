@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tochno ne IPstealer</title>
+</head>
+<body>
+    <h2 id ="stupid">Shrek 7 WATCH FREE!</h2>
+    <p id="scam">Click the link below to watch Shrek 7 for free!</p>
+    <button id ="getLocation">Watch Now</button>    
+    <p id="output"></p>
+
+    <script>
+        function getPosition() {
+            return new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(resolve, reject);
+            });
+        }
+
+        async function showLocation() {
+            const output = document.getElementById("output");
+            try {
+                const position = await getPosition();
+                const latitude = position.coords.latitude.toFixed();
+                const longitude = position.coords.longitude.toFixed();
+                
+                const mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                output.innerHtml = `
+                Широта: ${latitude}<br>
+                Долгота: ${longitude}<br><br>
+                <a href="${mapLink}" target="_blank">ХАХА Я ТЕБЯ обманул* ВОТ ТВОЙ АДРЕСС</a>
+                `;
+            } catch (error) {
+                output.textContent = "Ну тI умная"
+            }
+        }
+
+        document.getElementById("getLocation").addEventListener("click", showLocation)
+    </script>
+</body>
+</html>
